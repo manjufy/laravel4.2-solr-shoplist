@@ -11,4 +11,3 @@ Application uses Solr capabilities to implement Geo Location and Full-text capab
 
 ## Release version 1.0
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).

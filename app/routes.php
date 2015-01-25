@@ -11,7 +11,15 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function () {
+    return View::make('hello');
 });
+
+# Administrator/Manager Routes
+
+Route::get('manager',
+    [
+        'as' => 'manager',
+        'uses' => 'ManagerHomeController@showIndex'
+    ]
+);

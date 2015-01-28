@@ -14,6 +14,6 @@
 class ManagerHomeController extends ManagerController{
 
     public function showIndex() {
-        return View::make('manager/index');
+        return View::make('manager.index');
     }
 }

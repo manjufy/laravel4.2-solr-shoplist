@@ -11,15 +11,56 @@
 |
 */
 
-Route::get('/', function () {
-    return View::make('index');
-});
+Route::get(
+    '/',
+    function () {
+        return View::make('index');
+    }
+);
 
 # Administrator/Manager Routes
 
-Route::get('manager',
+// show manager/admin login page
+Route::get(
+    'manager',
     [
-        'as' => 'manager',
+        'as'   => 'manager',
         'uses' => 'ManagerHomeController@showIndex'
+    ]
+);
+
+// process the login form
+
+Route::post(
+    'manager',
+    [
+        'uses' => 'ManagerHomeController@doLogin'
+    ]
+);
+
+// manager/admin landing page
+Route::get(
+    'manager/dashboard',
+    [
+        'as'   => 'manager/dashboard',
+        'uses' => 'ManagerDashboardController@showIndex'
+    ]
+);
+
+// logout
+Route::get(
+    'manager/logout',
+    [
+        'as'   => 'manager/logout',
+        'uses' => 'ManagerHomeController@doLogout'
+    ]
+);
+
+// Shop related Routes
+Route::get(
+    'manager/shop',
+    [
+        'as'   => 'manager/shop',
+        'uses' => 'ManagerShopController@showIndex'
     ]
 );

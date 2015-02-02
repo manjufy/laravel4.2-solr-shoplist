@@ -7,8 +7,17 @@
     <title>Welcome to Administration</title>
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    {{ HTML::script('css/style.css'); }}
 </head>
 <body>
+
+
+@if(Auth::check())
+    <!-- if logged in then only show -->
+    @include('manager.layouts.elements.topnav')
+@endif
+    <!-- end of if -->
+
 <div class="container">
     @yield('content')
 </div>

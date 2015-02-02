@@ -54,7 +54,7 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '192.168.2.67',
+			'host'      => '192.168.0.102',
 			'database'  => 'hstore', // hardware store
 			'username'  => 'root',
 			'password'  => '',

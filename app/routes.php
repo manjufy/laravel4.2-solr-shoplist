@@ -64,3 +64,45 @@ Route::get(
         'uses' => 'ManagerShopController@showIndex'
     ]
 );
+
+
+// Shop related Routes
+Route::get(
+    'manager/category',
+    [
+        'as'   => 'manager/category',
+        'uses' => 'ManagerCategoryController@showIndex'
+    ]
+);
+
+Route::get(
+    'manager/category/add',
+    [
+        'as'   => 'manager/category/add',
+        'uses' => 'ManagerCategoryController@showAdd'
+    ]
+);
+
+Route::post(
+    'manager/category/add',
+    [
+        'as'   => 'manager/category/add',
+        'uses' => 'ManagerCategoryController@add'
+    ]
+);
+
+Route::get(
+    'manager/category/{id}/edit',
+    [
+        'as'   => 'manager/category/edit',
+        'uses' => 'ManagerCategoryController@showEdit'
+    ]
+);
+
+Route::post(
+    'manager/category/{id}/edit',
+    [
+        'as'   => 'manager/category/edit',
+        'uses' => 'ManagerCategoryController@edit'
+    ]
+);

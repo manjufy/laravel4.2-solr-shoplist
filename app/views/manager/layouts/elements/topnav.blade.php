@@ -21,7 +21,7 @@
             <li><a href="#">Country List</a></li>
             <li><a href="#">State List</a></li>
             <li><a href="#">Town List</a></li>
-            <li><a href="#">Category List</a></li>
+            <li><a href="{{ URL::to('manager/category')}}">Category List</a></li>
             <li class="divider"></li>
             <li class="dropdown-header">User Management</li>
             <li><a href="#">Users</a></li>

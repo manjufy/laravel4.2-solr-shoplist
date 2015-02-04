@@ -28,16 +28,6 @@ class Category extends Eloquent
         'description' => 'required'
     ];
 
-
-    /**
-     * Defining relationship.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function country()
-    {
-        return $this->belongsTo('State');
-    }
-
     /**
      * @param $data
      *

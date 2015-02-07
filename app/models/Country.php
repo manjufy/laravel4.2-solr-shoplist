@@ -28,6 +28,12 @@ class Country extends Eloquent
         'code' => 'required'
     ];
 
+
+    public function states()
+    {
+        return $this->hasMany('State', 'country_id');
+    }
+
     /**
      * @param $data
      *

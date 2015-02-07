@@ -115,6 +115,9 @@ class ManagerCategoryController extends ManagerController
      */
     public function delete($id)
     {
+        $category = Category::find($id);
+        $category->delete();
 
+        return Redirect::to('manager/category');
     }
 }

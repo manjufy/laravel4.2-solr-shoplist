@@ -66,7 +66,7 @@ Route::get(
 );
 
 
-// Shop related Routes
+// Category related Routes
 Route::get(
     'manager/category',
     [
@@ -104,5 +104,170 @@ Route::post(
     [
         'as'   => 'manager/category/edit',
         'uses' => 'ManagerCategoryController@edit'
+    ]
+);
+
+Route::get(
+    'manager/category/{id}/delete',
+    [
+        'as'   => 'manager/category/delete',
+        'uses' => 'ManagerCategoryController@delete'
+    ]
+);
+
+// Country related Routes
+Route::get(
+    'manager/country',
+    [
+        'as'   => 'manager/country',
+        'uses' => 'ManagerCountryController@showIndex'
+    ]
+);
+
+Route::get(
+    'manager/country/add',
+    [
+        'as'   => 'manager/country/add',
+        'uses' => 'ManagerCountryController@showAdd'
+    ]
+);
+
+Route::post(
+    'manager/country/add',
+    [
+        'as'   => 'manager/country/add',
+        'uses' => 'ManagerCountryController@add'
+    ]
+);
+
+Route::get(
+    'manager/country/{id}/edit',
+    [
+        'as'   => 'manager/country/edit',
+        'uses' => 'ManagerCountryController@showEdit'
+    ]
+);
+
+Route::post(
+    'manager/country/{id}/edit',
+    [
+        'as'   => 'manager/country/edit',
+        'uses' => 'ManagerCountryController@edit'
+    ]
+);
+
+Route::get(
+    'manager/country/{id}/delete',
+    [
+        'as'   => 'manager/country/delete',
+        'uses' => 'ManagerCountryController@delete'
+    ]
+);
+
+// State related Routes
+Route::get(
+    'manager/state',
+    [
+        'as'   => 'manager/state',
+        'uses' => 'ManagerStateController@showIndex'
+    ]
+);
+
+Route::get(
+    'manager/state/add',
+    [
+        'as'   => 'manager/state/add',
+        'uses' => 'ManagerStateController@showAdd'
+    ]
+);
+
+Route::post(
+    'manager/state/add',
+    [
+        'as'   => 'manager/state/add',
+        'uses' => 'ManagerStateController@add'
+    ]
+);
+
+Route::get(
+    'manager/state/{id}/edit',
+    [
+        'as'   => 'manager/state/edit',
+        'uses' => 'ManagerStateController@showEdit'
+    ]
+);
+
+Route::post(
+    'manager/state/{id}/edit',
+    [
+        'as'   => 'manager/state/edit',
+        'uses' => 'ManagerStateController@edit'
+    ]
+);
+
+Route::get(
+    'manager/state/{id}/delete',
+    [
+        'as'   => 'manager/state/delete',
+        'uses' => 'ManagerStateController@delete'
+    ]
+);
+
+// Town related Routes
+Route::get(
+    'manager/town',
+    [
+        'as'   => 'manager/town',
+        'uses' => 'ManagerTownController@showIndex'
+    ]
+);
+
+Route::get(
+    'manager/town/add',
+    [
+        'as'   => 'manager/town/add',
+        'uses' => 'ManagerTownController@showAdd'
+    ]
+);
+
+Route::post(
+    'manager/town/add',
+    [
+        'as'   => 'manager/town/add',
+        'uses' => 'ManagerTownController@add'
+    ]
+);
+
+Route::get(
+    'manager/town/{id}/edit',
+    [
+        'as'   => 'manager/town/edit',
+        'uses' => 'ManagerTownController@showEdit'
+    ]
+);
+
+Route::post(
+    'manager/town/{id}/edit',
+    [
+        'as'   => 'manager/town/edit',
+        'uses' => 'ManagerTownController@edit'
+    ]
+);
+
+Route::get(
+    'manager/town/{id}/delete',
+    [
+        'as'   => 'manager/town/delete',
+        'uses' => 'ManagerTownController@delete'
+    ]
+);
+
+//API Calls
+
+Route::get(
+    'manager/api/state/{country_id}',
+    [
+        'as'   => 'manager/api/state/{country_id',
+        'uses' => 'ManagerAPIController@state'
     ]
 );

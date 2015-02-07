@@ -18,9 +18,9 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Country List</a></li>
-            <li><a href="#">State List</a></li>
-            <li><a href="#">Town List</a></li>
+            <li><a href="{{ URL::to('manager/country')}}">Country List</a></li>
+            <li><a href="{{ URL::to('manager/state')}}">State List</a></li>
+            <li><a href="{{ URL::to('manager/town')}}">Town List</a></li>
             <li><a href="{{ URL::to('manager/category')}}">Category List</a></li>
             <li class="divider"></li>
             <li class="dropdown-header">User Management</li>

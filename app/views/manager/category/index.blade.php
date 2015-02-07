@@ -17,7 +17,7 @@
       <tr>
         <td>{{$category->name}}</td>
         <td>{{$category->description}}</td>
-        <td>{{HTML::linkRoute('manager/category/edit', 'Edit', $category->id)}}</td>
+        <td>{{HTML::linkRoute('manager/category/edit', 'Edit', $category->id)}} | {{HTML::linkRoute('manager/category/delete', 'Delete', $category->id)}}</td>
       </tr>
   @endforeach
 </table>

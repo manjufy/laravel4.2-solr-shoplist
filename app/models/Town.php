@@ -18,19 +18,21 @@ class Town extends Eloquent
      */
     protected $fillable = array('state_id', 'name', 'latitude', 'longitude', 'created_by', 'updated_by');
 
+    public $state;
     /**
      * Validation rules
      *
      * @var array
      */
     public static $rules = [
-        'name' => 'required',
-        'code' => 'required'
+        'name'  => 'required',
+        'state' => 'required'
     ];
 
 
     /**
      * Defining relationship.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function country()
@@ -46,5 +48,34 @@ class Town extends Eloquent
     public static function validate($data)
     {
         return Validator::make($data, static::$rules);
+    }
+
+    /**
+     * Get all towns.
+     *
+     * @param $page
+     *
+     * @return \Illuminate\Pagination\Paginator
+     */
+    public static function getAll($page)
+    {
+        DB::getPaginator()->setCurrentPage($page);
+        $towns = DB::table('town')
+            ->join('state', 'town.state_id', '=', 'state.id')
+            ->join('country', 'state.country_id', '=', 'country.id')
+            ->select(
+                'town.id',
+                'town.name',
+                'town.latitude',
+                'town.longitude',
+                'state.name as state',
+                'state.country_id',
+                'country.name as country',
+                'country.code'
+            )
+            ->paginate(10);
+
+        return $towns;
+
     }
 }

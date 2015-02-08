@@ -6,7 +6,9 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "barryvdh/laravel-ide-helper": "dev-master"
+        "barryvdh/laravel-ide-helper": "dev-master",
+        "solarium/solarium": "dev-develop",
+        "guzzle/guzzle": "3.7.3"
 	},
 	"autoload": {
 		"classmap": [

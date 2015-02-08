@@ -13,10 +13,41 @@
 
 Route::get(
     '/',
-    function () {
-        return View::make('index');
-    }
+    'HomeController@showWelcome'
 );
+
+Route::get(
+    'aboutus',
+    'HomeController@showAboutUs'
+);
+
+Route::get(
+    'contactus',
+    'HomeController@showContactUs'
+);
+
+
+# store related
+Route::get(
+    'store/all',
+    'StoreController@showIndex'
+);
+
+Route::get(
+    'store/nearbyme',
+    'StoreController@showNearByMe'
+);
+
+Route::post(
+    'store/search',
+    'StoreController@doSearch'
+);
+
+Route::get(
+    'store/search',
+    'StoreController@search'
+);
+
 
 # Administrator/Manager Routes
 

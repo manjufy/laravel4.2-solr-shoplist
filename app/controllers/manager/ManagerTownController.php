@@ -56,12 +56,11 @@ class ManagerTownController extends ManagerController
     }
 
     /**
-     * Add new state
+     * Add new Town
      */
     public function add()
     {
         // validate the info
-        //print_r(Input::all());die;
         $validator = State::validate(Input::all());
 
         // if the validator fails, redirect back to the form
@@ -86,7 +85,7 @@ class ManagerTownController extends ManagerController
     }
 
     /**
-     * Show edit state page.
+     * Show edit town page.
      *
      * @param $id
      *
@@ -113,12 +112,11 @@ class ManagerTownController extends ManagerController
         }
 
         $town = Town::find($id);
-
         return View::make('manager.town.edit', compact('town', 'country_list', 'state_list'));
     }
 
     /**
-     * Edit existing state
+     * Edit existing town
      */
     public function edit($id)
     {
@@ -148,13 +146,13 @@ class ManagerTownController extends ManagerController
     }
 
     /**
-     * Delete existing state
+     * Delete existing town
      */
     public function delete($id)
     {
-        $state = State::find($id);
-        $state->delete();
+        $town = Town::find($id);
+        $town->delete();
 
-        return Redirect::to('manager/state');
+        return Redirect::to('manager/town');
     }
 }

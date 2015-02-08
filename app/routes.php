@@ -65,6 +65,46 @@ Route::get(
     ]
 );
 
+Route::get(
+    'manager/shop/add',
+    [
+        'as'   => 'manager/shop/add',
+        'uses' => 'ManagerShopController@showAdd'
+    ]
+);
+
+Route::post(
+    'manager/shop/add',
+    [
+        'as'   => 'manager/shop/add',
+        'uses' => 'ManagerShopController@add'
+    ]
+);
+
+Route::get(
+    'manager/shop/{id}/edit',
+    [
+        'as'   => 'manager/shop/edit',
+        'uses' => 'ManagerShopController@showEdit'
+    ]
+);
+
+Route::post(
+    'manager/shop/{id}/edit',
+    [
+        'as'   => 'manager/shop/edit',
+        'uses' => 'ManagerShopController@edit'
+    ]
+);
+
+Route::get(
+    'manager/shop/{id}/delete',
+    [
+        'as'   => 'manager/shop/delete',
+        'uses' => 'ManagerShopController@delete'
+    ]
+);
+
 
 // Category related Routes
 Route::get(
@@ -267,7 +307,15 @@ Route::get(
 Route::get(
     'manager/api/state/{country_id}',
     [
-        'as'   => 'manager/api/state/{country_id',
+        'as'   => 'manager/api/state/{country_id}',
         'uses' => 'ManagerAPIController@state'
+    ]
+);
+
+Route::get(
+    'manager/api/town/{state_id}',
+    [
+        'as'   => 'manager/api/state/{state_id}',
+        'uses' => 'ManagerAPIController@town'
     ]
 );

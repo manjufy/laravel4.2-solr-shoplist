@@ -65,9 +65,27 @@ class State extends Eloquent
 
     }
 
+    /**
+     * Get states by countryId.
+     *
+     * @param $countryId
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public static function getStatesByCountryId($countryId)
     {
 
-        return self::where('country_id', '=', $countryId)->get(['id','name']);
+        return self::where('country_id', '=', $countryId)->get(['id', 'name']);
+    }
+
+    /**
+     * Get State Id By State Name.
+     * @param $name
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getIdByName($name)
+    {
+        return self::where('name', '=', $name)->get(['id']);
     }
 }

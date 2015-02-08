@@ -24,7 +24,7 @@
     <div class="form-group">
         {{ Form::label('state', 'State', array('class' => 'control-label col-xs-2')) }}
         <div class="col-xs-5">
-            {{ Form::select('state', $state_list, array_values($state_list), array('class' => 'form-control selectpicker')) }}
+            {{ Form::select('state', $state_list,  $town->state_id, array('class' => 'form-control selectpicker')) }}
         </div>
     </div>
     <div class="form-group">

@@ -15,7 +15,8 @@ class ManagerAPIController extends ManagerController
 {
 
     /**
-     * GEt manager/api/state/{country_id}.
+     * GET manager/api/state/{country_id}.
+     *
      * @param $country_id
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
@@ -25,5 +26,19 @@ class ManagerAPIController extends ManagerController
         $states = State::getStatesByCountryId($country_id);
 
         return $states;
+    }
+
+    /**
+     * GET manager/api/town/{state_id}
+     *
+     * @param state_id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function town($state_id)
+    {
+        $towns = Town::getTownsByStateId($state_id);
+
+        return $towns;
     }
 } 

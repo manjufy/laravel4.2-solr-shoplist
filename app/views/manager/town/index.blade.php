@@ -7,7 +7,7 @@
   </div>
 </div>
 <hr class="divider">
-<table class="table table-bordered">
+<table class="table table-bordered table-striped ">
   <tr>
     <th>Town</th>
     <th>State</th>

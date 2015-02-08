@@ -78,4 +78,27 @@ class Town extends Eloquent
         return $towns;
 
     }
+
+    /**
+     * Get towns by stateId.
+     *
+     * @param stateId
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getTownsByStateId($stateId)
+    {
+        return self::where('state_id', '=', $stateId)->get(['id', 'name']);
+    }
+
+    /**
+     * Get townId by Town Name.
+     * @param $name
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getIdByName($name)
+    {
+        return self::where('name', '=', $name)->get(['id']);
+    }
 }

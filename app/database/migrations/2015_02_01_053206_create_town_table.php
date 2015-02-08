@@ -22,8 +22,8 @@ class CreateTownTable extends Migration
                     $table->increments('id');
                     $table->integer('state_id', false, true);
                     $table->string('name', 45);
-                    $table->double('latitude');
-                    $table->double('longitude');
+                    $table->double('latitude')->nullable();
+                    $table->double('longitude')->nullable();
                     $table->string('created_by', 45);
                     $table->string('updated_by', 45);
                     $table->timestamps();

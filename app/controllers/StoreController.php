@@ -3,6 +3,8 @@
 class StoreController extends BaseController
 {
 
+    private $_numberOfLinks = 10;
+    private $_pageLimit = 3;
     /*
     |--------------------------------------------------------------------------
     | Default Store Controller
@@ -25,12 +27,12 @@ class StoreController extends BaseController
             'shop'     => Input::get('shop'),
             'keyword'  => Input::get('keyword')
         ];
-
-        $shops = Solr::getAllByQuery($search_fields);
-
+        $solr = new Solr();
+        $shops = $solr->getAllByQuery($search_fields, Input::get('page', 0), Input::get('limit', $this->_pageLimit));
+        $pagination = $solr->createLinks($this->_numberOfLinks, 'pagination pagination-sm');
         $facets = $shops['facets'];
         $results = $shops['result'];
-        return View::make('store.all', compact('results', 'facets'));
+        return View::make('store.all', compact('results', 'facets', 'pagination'));
     }
 
     /**
@@ -48,16 +50,19 @@ class StoreController extends BaseController
             'keyword'  => Input::get('keyword')
         ];
 
-        $shops = Solr::getAllByQuery($search_fields);
+        $solr = new Solr();
+        $shops = $solr->getAllByQuery($search_fields, Input::get('page', 0), Input::get('limit', $this->_pageLimit));
+        $pagination = $solr->createLinks($this->_numberOfLinks, 'pagination pagination-sm');
 
         $facets = $shops['facets'];
         $results = $shops['result'];
 
-        return View::make('store.search_results', compact('results', 'facets'));
+        return View::make('store.search_results', compact('results', 'facets', 'pagination'));
     }
 
     /**
      * POST store/search.
+     *
      * @return \Illuminate\View\View
      */
     public function doSearch()
@@ -70,12 +75,13 @@ class StoreController extends BaseController
             'keyword'  => Input::get('keyword')
         ];
 
-        $shops = Solr::getAllByQuery($search_fields);
-
+        $solr = new Solr();
+        $shops = $solr->getAllByQuery($search_fields, Input::get('page', 0), Input::get('limit', $this->_pageLimit));
+        $pagination = $solr->createLinks($this->_numberOfLinks, 'pagination pagination-sm');
         $facets = $shops['facets'];
         $results = $shops['result'];
 
-        return View::make('store.search_results', compact('results', 'facets'));
+        return View::make('store.search_results', compact('results', 'facets', 'pagination'));
     }
 
     /**
@@ -85,6 +91,22 @@ class StoreController extends BaseController
      */
     public function showNearByMe()
     {
-        return View::make('store.nearbyme');
+        $lat = Input::get('lat');
+        $long = Input::get('long');
+        $distance = Input::get('d', 50);
+        // instantiate solr
+        $solr = new Solr();
+        $pagination = $solr->createLinks($this->_numberOfLinks, 'pagination pagination-sm');
+
+        if (!empty($lat) && !empty($long)) {
+            $shops = $solr->getAllByGeo($lat, $long, $distance, Input::get('page', 0), Input::get('limit', $this->_pageLimit));
+        } else {
+
+            $shops = $solr->getAll(Input::get('page', 0), Input::get('limit', $this->_pageLimit));
+        }
+
+        $facets = $shops['facets'];
+        $results = $shops['result'];
+        return View::make('store.nearbyme', compact('facets', 'results', 'pagination'));
     }
 }

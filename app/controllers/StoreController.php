@@ -96,15 +96,14 @@ class StoreController extends BaseController
         $distance = Input::get('d', 50);
         // instantiate solr
         $solr = new Solr();
-        $pagination = $solr->createLinks($this->_numberOfLinks, 'pagination pagination-sm');
 
         if (!empty($lat) && !empty($long)) {
             $shops = $solr->getAllByGeo($lat, $long, $distance, Input::get('page', 0), Input::get('limit', $this->_pageLimit));
         } else {
-
             $shops = $solr->getAll(Input::get('page', 0), Input::get('limit', $this->_pageLimit));
         }
 
+        $pagination = $solr->createLinks($this->_numberOfLinks, 'pagination pagination-sm');
         $facets = $shops['facets'];
         $results = $shops['result'];
         return View::make('store.nearbyme', compact('facets', 'results', 'pagination'));

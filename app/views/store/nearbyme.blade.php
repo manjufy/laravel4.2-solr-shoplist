@@ -130,6 +130,7 @@
                <?php
                }
                ?>
+               {{ $pagination; }}
         </div>
     </div>
 @stop

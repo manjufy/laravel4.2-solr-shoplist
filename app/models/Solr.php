@@ -40,7 +40,7 @@ class Solr
         $start = ($this->_page == 1 || $this->_page == 0) ? 0 : ($this->_limit * ($this->_page - 1));
 
         $facetQuery = "&facet=true&facet.field=category&facet.field=state&facet.field=town&json.nl=map";
-        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . '&rows=' . $this->_limit . '&start=' . $start;
+        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . '&rows=' . $this->_limit . '&start=' . $start.'&sort=rank asc';
 
         $url = self::getSolrUrl() . $query;
 
@@ -112,7 +112,7 @@ class Solr
         $start = ($this->_page == 1 || $this->_page == 0) ? 0 : ($this->_limit * ($this->_page - 1));
 
         $facetQuery = "&facet=true&facet.field=category&facet.field=state&facet.field=town&json.nl=map&facet.mincount=1";
-        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . $fq . '&rows=' . $this->_limit . '&start=' . $start;
+        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . $fq . '&rows=' . $this->_limit . '&start=' . $start.'&sort=rank asc';
 
         $url = self::getSolrUrl() . $query;
 

@@ -106,7 +106,11 @@ class ManagerShopController extends ManagerController
             $shop->created_by = Auth::getName();
             $shop->updated_by = Auth::getName();
 
-            $shop->save();
+            if ($shop->save() === true) {
+                // save to solr
+                $solr = new Solr();
+                $solr->save($shop->id);
+            }
             return Redirect::to('manager/shop');
         }
     }
@@ -199,6 +203,8 @@ class ManagerShopController extends ManagerController
             $shop->updated_by = Auth::getName();
 
             $shop->update();
+            $solr = new Solr();
+            $solr->save($id);
             return Redirect::to('manager/shop');
         }
     }
@@ -210,6 +216,10 @@ class ManagerShopController extends ManagerController
     {
         $shop = Shop::find($id);
         $shop->delete();
+
+        // delete it from solr as well
+        $solr = new Solr();
+        $solr->delete($id);
 
         return Redirect::to('manager/shop');
     }

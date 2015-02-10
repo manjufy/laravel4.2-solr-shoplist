@@ -12,6 +12,8 @@ class Solr
 
     protected $client;
 
+    protected $_connection = null;
+
     /**
      * Constructor
      */
@@ -40,7 +42,7 @@ class Solr
         $start = ($this->_page == 1 || $this->_page == 0) ? 0 : ($this->_limit * ($this->_page - 1));
 
         $facetQuery = "&facet=true&facet.field=category&facet.field=state&facet.field=town&json.nl=map";
-        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . '&rows=' . $this->_limit . '&start=' . $start.'&sort=rank asc';
+        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . '&rows=' . $this->_limit . '&start=' . $start . '&sort=rank asc';
 
         $url = self::getSolrUrl() . $query;
 
@@ -112,7 +114,7 @@ class Solr
         $start = ($this->_page == 1 || $this->_page == 0) ? 0 : ($this->_limit * ($this->_page - 1));
 
         $facetQuery = "&facet=true&facet.field=category&facet.field=state&facet.field=town&json.nl=map&facet.mincount=1";
-        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . $fq . '&rows=' . $this->_limit . '&start=' . $start.'&sort=rank asc';
+        $query = 'q=*:*&wt=json&indent=true' . $facetQuery . $fq . '&rows=' . $this->_limit . '&start=' . $start . '&sort=rank asc';
 
         $url = self::getSolrUrl() . $query;
 
@@ -199,6 +201,62 @@ class Solr
     }
 
     /**
+     * Index Document to Solr.
+     *
+     * @param $id
+     *
+     * @return \Solarium\QueryType\Update\Result
+     */
+    public function save($id)
+    {
+        $shop = Shop::find($id);
+
+        // create a solr connection
+        $client = $this->solrConnection();
+
+        $updateDOcument = $client->createUpdate();
+        $shopDocument = $updateDOcument->createDocument();
+        $shopDocument->id = $shop->id;
+        $shopDocument->name = $shop->name;
+        $shopDocument->category = $shop->category;
+        $shopDocument->state = $shop->state;
+        $shopDocument->town = $shop->town;
+        $shopDocument->town_location = "$shop->town_latitude,$shop->town_longitude";
+        $shopDocument->address = $shop->address;
+        $shopDocument->tel = $shop->tel;
+        $shopDocument->fax = $shop->fax;
+        $shopDocument->cperson = $shop->cperson;
+        $shopDocument->mobile = $shop->mobile;
+        $shopDocument->email = $shop->email;
+        $shopDocument->urlcom = $shop->description;
+        $shopDocument->urladv = $shop->urlcom;
+        $shopDocument->description = $shop->urladv;
+        $shopDocument->rank = $shop->rank;
+        $shopDocument->shop_location = "$shop->latitude,$shop->longitude";
+
+        $updateDOcument->addDocument($shopDocument);
+        $updateDOcument->addCommit();
+
+        $result = $client->update($updateDOcument);
+
+        return $result;
+    }
+
+    public function delete($id)
+    {
+        try {
+            $connection = $this->solrConnection();
+            $deleteShop = $connection->createUpdate();
+            $deleteShop->addDeleteById($id);
+            $deleteShop->addCommit();
+
+            $connection->update($deleteShop);
+        } catch(\Solarium\Exception\HttpException $e) {
+            throw new Exception ("Unable to delete shop from Solr");
+        }
+    }
+
+    /**
      * Create custom pagination link.
      *
      * @param $links
@@ -258,5 +316,38 @@ class Solr
         $url = 'http://' . $uri . '/select?';
 
         return $url;
+    }
+
+    /**
+     * Solr Connection.
+     *
+     * @return \Solarium\Client
+     * @throws Exception
+     */
+    private function solrConnection()
+    {
+        $this->_connection = new Solarium\Client(
+            array(
+                'endpoint' => array(
+                    'adapteroptions' => array(
+                        'host'    => Config::get('solr')['host'],
+                        'port'    => Config::get('solr')['port'],
+                        'path'    => Config::get('solr')['path'],
+                        'core'    => Config::get('solr')['core'],
+                        //Create core with country code. Example: For Malaysia, Solr core is 'my'
+                        'timeout' => 15
+                    )
+                )
+            )
+        );
+
+        $ping = $this->_connection->createPing();
+        try {
+            $this->_connection->ping($ping);
+        } catch(\Solarium\Exception\HttpException $e) {
+            throw new Exception("Unable to connect to Solr");
+        }
+
+        return $this->_connection;
     }
 } 

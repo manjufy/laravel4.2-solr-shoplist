@@ -11,24 +11,24 @@ Solr is used for Keyword Search, Faceting and Geospatial
 MySQL is used to Store the shop list (Single Source of truth)
 
 ## Solr
-Solr Version used is 4.10.3
-Core name : Store
-Configuration: You could find the solr configuration in app/config/solr.php
+* Solr Version used is 4.10.3
+* Core name : Store
+* Configuration: You could find the solr configuration in app/config/solr.php
 
 ## Database MySQL
-Create database name : hstore
-Database tables and sample data is in data/hstore_2015_04_21.sql
-Import this sql into hstore database
+* Create database name : hstore
+* Database tables and sample data is in data/hstore_2015_04_21.sql
+* Import this sql into hstore database
 
 ## Nginx Configuration
-Look data/ngix
+* Please look in data/ngix
 
 
 ## Run
- Once your done with Nginx, MySQL and Solr configuration
+Once your done with Nginx, MySQL and Solr configuration
 
- Go to http://{yourhost}:3333 for store front end
- Go to http://{yourhost}:3333/manager
+* Go to http://{yourhost}:3333 for store front end
+* Go to http://{yourhost}:3333/manager
 * * username:admin
 * * password:admin
 

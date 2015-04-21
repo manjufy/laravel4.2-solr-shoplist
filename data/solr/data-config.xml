@@ -1,0 +1,12 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" name="solr" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1/shop"
+                batchSize="-1" user="root" password=""/>
+    <document>
+        <entity name="shop" query="select id,name,category,state,town,
+                CONCAT(town_latitude,',',town_longitude) as town_location,
+                address,tel,fax,cperson,mobile,email,description,urlcom,urladv,description,rank,
+                CONCAT(latitude,',',longitude) as shop_location
+                FROM shop">
+        </entity>
+    </document>
+</dataConfig>

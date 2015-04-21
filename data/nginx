@@ -1,22 +1,27 @@
 server {
-        listen   9999;
-        server_name hstore.local;
-        access_log      /home/manju/Programming/Projects/PHP/hstore/app/storage/logs/access.log;
-        error_log       /home/manju/Programming/Projects/PHP/hstore/app/storage/logs/error.log;
+        listen   3333;
+        server_name {hostname/ipaddress};
+        client_max_body_size 4M;
+        sendfile  off;
+
+        root /var/www/hardwareshop/public/;
+        error_log /var/log/nginx/hshop-error.log;
         rewrite_log on;
-        root /home/manju/Programming/Projects/PHP/hstore/public/;
         index index.php index.html index.htm;
 
         location / {
-             try_files $uri $uri/ /index.php$is_args$args;
+                #try_files $uri $uri/ /index.php$is_args&args;
+                try_files $uri $uri/ /index.php?$query_string;
         }
 
-        # pass the PHP scripts to FastCGI server listening on /var/run/php5-fpm.sock
-        location ~ \.php$ {
+
+        location ~ \.php {
                 try_files $uri /index.php =404;
-                fastcgi_pass unix:/var/run/php5-fpm.sock;
+                #fastcgi_pass unix:/var/run/php5-fpm.sock;
+                fastcgi_pass unix:/tmp/php5-fpm.socket ;
                 fastcgi_index index.php;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 include fastcgi_params;
         }
+
 }

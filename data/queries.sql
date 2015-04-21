@@ -1,0 +1,1 @@
+UPDATE town set latitude=3.1666667, longitude=101.7;

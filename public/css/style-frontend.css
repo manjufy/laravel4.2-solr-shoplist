@@ -1,0 +1,16 @@
+body
+{
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+}
+
+.hrdiv {
+    width: 80%;
+    height: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:#FF0066;
+    color:#FF0066;
+    border: 0 none;
+    margin-top: 5px;
+    margin-bottom:5px;
+}

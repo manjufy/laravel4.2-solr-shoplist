@@ -105,7 +105,7 @@
                    <div class="col-md-10">
                        <div class="row">
                            <div class="col-md-9">
-                               <b><a href=""><?php echo $list['name']; ?></a></b>
+                               <b><a href="{{URL::to('store/view/')}}/<?php echo $list['id']; ?>"><?php echo $list['name']; ?></a></b>
                                <p>
                                    <b>Category : </b><?php echo $list['category']; ?>
                                </p>

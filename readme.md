@@ -1,13 +1,35 @@
-## Hardware Shop Finder (Laravel)
+## Hardware Shop Finder (Laravel 4.2)
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Hardware Shop finder, lists Hardware shops
+Administrator can add define and add more shops from the administrator section.
+Use could browse through the list of hardware shops using location filter.
+User could also browse by 'Nearbyme' feature that would list down all the shops near user location.
 
-Hardware Shop Finder application enables consumers to find the hardware shops near to their current location or enables to search based on location filter.
-Application uses Solr capabilities to implement Geo Location and Full-text capabilities.
+Application written in Laravel 4.2.* with MySQL as Database and Solr for search capabilities
 
-## Release version 1.0
+Solr is used for Keyword Search, Faceting and Geospatial
+MySQL is used to Store the shop list (Single Source of truth)
+
+## Solr
+Solr Version used is 4.10.3
+Core name : Store
+Configuration: You could find the solr configuration in app/config/solr.php
+
+## Database MySQL
+Create database name : hstore
+Database tables and sample data is in data/hstore_2015_04_21.sql
+Import this sql into hstore database
+
+## Nginx Configuration
+Look data/ngix
+
+
+## Run
+ Once your done with Nginx, MySQL and Solr configuration
+
+ Go to http://{yourhost}:3333 for store front end
+ Go to http://{yourhost}:3333/manager
+* * username:admin
+* * password:admin
+
 

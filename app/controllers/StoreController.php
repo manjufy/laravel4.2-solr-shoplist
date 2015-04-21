@@ -5,6 +5,7 @@ class StoreController extends BaseController
 
     private $_numberOfLinks = 10;
     private $_pageLimit = 3;
+
     /*
     |--------------------------------------------------------------------------
     | Default Store Controller
@@ -98,7 +99,13 @@ class StoreController extends BaseController
         $solr = new Solr();
 
         if (!empty($lat) && !empty($long)) {
-            $shops = $solr->getAllByGeo($lat, $long, $distance, Input::get('page', 0), Input::get('limit', $this->_pageLimit));
+            $shops = $solr->getAllByGeo(
+                $lat,
+                $long,
+                $distance,
+                Input::get('page', 0),
+                Input::get('limit', $this->_pageLimit)
+            );
         } else {
             $shops = $solr->getAll(Input::get('page', 0), Input::get('limit', $this->_pageLimit));
         }
@@ -107,5 +114,18 @@ class StoreController extends BaseController
         $facets = $shops['facets'];
         $results = $shops['result'];
         return View::make('store.nearbyme', compact('facets', 'results', 'pagination'));
+    }
+
+    /**
+     * Detail page.
+     * @param $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function view($id)
+    {
+        $shop = Shop::find($id);
+
+        return View::make('store.view', compact('shop'));
     }
 }

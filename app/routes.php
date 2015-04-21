@@ -27,7 +27,7 @@ Route::get(
 );
 
 
-# store related
+# store related (frontend)
 Route::get(
     'store/all',
     'StoreController@showIndex'
@@ -46,6 +46,11 @@ Route::post(
 Route::get(
     'store/search',
     'StoreController@search'
+);
+
+Route::get(
+    'store/view/{id}',
+    'StoreController@view'
 );
 
 
